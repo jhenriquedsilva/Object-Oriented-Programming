@@ -85,8 +85,9 @@ public class Principal {
         agenda.excluirContato("Henrique");
         System.out.println(agenda.contarNumeroContatos());
         // Buscando um contato na agenda
-        System.out.println("\nBuscando um contato na agenda");
-        agenda.buscarContato("Lauriany");
-
+        System.out.println("\nBuscando Lauriany na agenda");
+        Contato contato = agenda.buscarContato("Lauriany");
+        System.out.println(contato.pegarNome());
+        System.out.println(contato.pegarEmail());
     }
 }
