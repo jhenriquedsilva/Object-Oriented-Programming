@@ -28,21 +28,6 @@ public class Principal {
         return (float) intNum;
     }
 
-    // Question 4
-    public static boolean isEven(int number) {
-        return number % 2 == 0;
-    }
-
-    // Question 5a
-    public static double celsius(float fahrenheit) {
-        return 5.0 / 9.0 * (fahrenheit - 1);
-    }
-
-    // Question 5b
-    public static double fahrenheit(double celsius) {
-        return 9.0 / 5.0 * celsius + 32;
-    }
-
     // Question 6
     public static double distance(double x1, double y1, double x2, double y2) {
         return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
@@ -60,8 +45,5 @@ public class Principal {
 
         // Question 1d
         System.out.println("\nI was an int, but I'm a float now: "+ intToFloat(10));
-
-        // Question 4
-        System.out.println("\nNumber 8 is even? "+ isEven(2));
     }
 }
