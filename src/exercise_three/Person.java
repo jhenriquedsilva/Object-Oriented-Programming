@@ -1,29 +1,49 @@
 package exercise_three;
 
 public class Person {
+
     private int age, birthDay, birthMonth, birthYear;
     private String name;
 
-    // I have to improve this
+    public Person(String name, int birthDay, int birthMonth, int birthYear) {
+        this.birthDay = birthDay;
+        this.birthMonth = birthMonth;
+        this.birthYear = birthYear;
+        this.name = name;
+    }
+
+    // calculaIdade
     public void calculatesAge(int currentDay, int currentMonth, int currentYear) {
-        int ageInDays = 0;
-        int yearsInDays = (currentYear - birthYear) * 360;
-        int monthsInDays = (currentMonth - birthMonth) * 30;
-        int days = currentDay - birthYear;
-        this.age = (yearsInDays + monthsInDays + days) / 360;
+        int age;
+        if (currentMonth < birthMonth) {
+            age = currentYear - birthYear - 1;
+        } else if (currentMonth == birthMonth){
+            if (currentDay < birthDay) {
+                age = age = currentYear - birthYear - 1;
+            } else {
+                age = age = currentYear - birthYear;
+            }
+        } else {
+            age = currentYear - birthYear;
+        }
+        this.age = age;
     }
 
-    public int provideAge() {
-        return age;
+    // informaIdade
+    public int getAge() {
+        return this.age;
     }
 
-    public String provideName() {
+    // informaNome
+    public String getName() {
         return this.name;
     }
 
-    public void resetBirthDate(int newBirthDay, int newBirthMonth, int newBirthYear) {
+    // ajustaDataDeNascimento
+    public void fixBirthDate(int newBirthDay, int newBirthMonth, int newBirthYear) {
         this.birthDay = newBirthDay;
         this.birthMonth = newBirthMonth;
         this.birthYear = newBirthYear;
     }
+
 }
