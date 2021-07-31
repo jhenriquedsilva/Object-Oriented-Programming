@@ -16,30 +16,36 @@ public class AdressBook {
     }
 
     // removePessoa
-    public void removePerson(Person person) {
-        if (people.contains(person)) {
-            people.remove(person);
-        } else {
-            System.out.println("This person does not exist");
+    public void removePerson(String name) {
+        for (Person person : people) {
+            if (person.getName() == name) {
+                people.remove(person);
+            }
         }
     }
 
     // buscaPessoa
-    public int findPerson(Person person) {
-        if (people.contains(person)) {
-            return people.indexOf(person);
-        } else {
-            System.out.println("This person does not exist");
-            return -1;
+    public int findPerson(String name) {
+        for (Person person : people) {
+            if (person.getName() == name) {
+                return people.indexOf(person);
+            }
         }
+        System.out.println("This person does not exist");
+        return -1;
     }
 
     // imprimeAgenda
     public void showAdressBook() {
-        for (Person p : people) {
-            System.out.println(p);
+        for (Person person : people) {
+            System.out.println(person);
         }
     }
 
     // imprimePessoa
+    public void showPerson(int index) {
+        if (index <= people.size()) {
+            System.out.println(people.get(index));
+        }
+    }
 }

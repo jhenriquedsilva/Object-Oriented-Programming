@@ -41,5 +41,12 @@ public class Principal {
         ilc.addPerson(gabriel);
         // Adding third department to university
         ufpa.addDepartment(ilc);
+
+        // Question 5
+
+        // Creating a television
+        Television tv = new Television();
+        tv.remote.turnVolumeDown(tv.getCurrentVolume());
+
     }
 }
