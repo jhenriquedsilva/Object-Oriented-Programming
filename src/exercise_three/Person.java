@@ -46,4 +46,11 @@ public class Person {
         this.birthYear = newBirthYear;
     }
 
+    @Override public String toString() {
+        return String.format(
+                "Name: %s%nBirthdate: %d/%d/%d%nAge: %d",
+                this.name, this.birthDay, this.birthMonth, this.birthYear,this.age
+        );
+    }
+
 }
