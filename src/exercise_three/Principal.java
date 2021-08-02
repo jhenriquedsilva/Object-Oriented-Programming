@@ -11,8 +11,9 @@ public class Principal {
         System.out.printf("Einstein is %d years old%n",albert.getAge());// Output -> Einstein is 142 years old
         System.out.printf("Newton is %d years old%n",isaac.getAge());// Output -> Newton is 378 years old
 
-        // Question 2
+        System.out.println();
 
+        // Question 2
         // Creating university
         University ufpa = new University("UFPA");
         // Creating first department
@@ -42,11 +43,28 @@ public class Principal {
         // Adding third department to university
         ufpa.addDepartment(ilc);
 
-        // Question 5
+        // Question 3
+        AdressBook ab = new AdressBook();
+        ab.addPerson(sergio);
+        ab.addPerson(lauriany);
+        ab.addPerson(henrique);
+        ab.showAdressBook();
+        ab.removePerson("Lauriany Laureiro");
+        ab.showAdressBook();
+        ab.findPerson("Sérgio Pinto");
+        ab.showPerson(1);
 
+        // Question 5
         // Creating a television
         Television tv = new Television();
-        tv.remote.turnVolumeDown(tv.getCurrentVolume());
+        tv.remote.showCurrentChannel();
+        tv.remote.showCurrentVolume();
+        tv.remote.turnVolumeDown();
+        tv.remote.showCurrentVolume();
+        tv.remote.turnUpChannel();
+        tv.remote.showCurrentChannel();
+        tv.remote.turnToChannel(75);
+        tv.remote.showCurrentChannel();
 
     }
 }

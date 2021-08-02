@@ -17,28 +17,29 @@ public class AdressBook {
 
     // removePessoa
     public void removePerson(String name) {
+        int index = 0;
         for (Person person : people) {
             if (person.getName() == name) {
-                people.remove(person);
+                people.remove(index);
             }
+            index++;
         }
     }
 
     // buscaPessoa
-    public int findPerson(String name) {
+    public void findPerson(String name) {
         for (Person person : people) {
             if (person.getName() == name) {
-                return people.indexOf(person);
+                System.out.printf("%s position is %d%n%n",person.getName(),people.indexOf(person));
             }
         }
-        System.out.println("This person does not exist");
-        return -1;
     }
 
     // imprimeAgenda
     public void showAdressBook() {
         for (Person person : people) {
             System.out.println(person);
+            System.out.println();
         }
     }
 
@@ -46,6 +47,7 @@ public class AdressBook {
     public void showPerson(int index) {
         if (index <= people.size()) {
             System.out.println(people.get(index));
+            System.out.println();
         }
     }
 }
