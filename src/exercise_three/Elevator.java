@@ -59,7 +59,7 @@ public class Elevator {
 
     // Sobe
     public void goUp() {
-        if (currentFloor > buildingTotalFloors) {
+        if (currentFloor < buildingTotalFloors) {
             System.out.println("Going up");
             currentFloor += 1;
         } else {

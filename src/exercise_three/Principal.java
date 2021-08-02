@@ -54,6 +54,23 @@ public class Principal {
         ab.findPerson("Sérgio Pinto");
         ab.showPerson(1);
 
+        // Question 4
+        Elevator elevator = new Elevator(10, 15);
+        System.out.println(elevator.getCurrentFloor());
+        System.out.println(elevator.getCurrentNumberOfPassengers());
+        elevator.getIn();
+        elevator.getIn();
+        System.out.println(elevator.getCurrentNumberOfPassengers());
+        elevator.goUp();
+        System.out.println(elevator.getCurrentFloor());
+        elevator.goUp();
+        elevator.goUp();
+        elevator.goDown();
+        elevator.getOut();
+        System.out.println(elevator.getCurrentFloor());
+        System.out.println(elevator.getCurrentNumberOfPassengers());
+        System.out.println();
+
         // Question 5
         // Creating a television
         Television tv = new Television();
@@ -65,6 +82,66 @@ public class Principal {
         tv.remote.showCurrentChannel();
         tv.remote.turnToChannel(75);
         tv.remote.showCurrentChannel();
+
+        // Program execution
+        /*
+        Einstein is 142 years old
+        Newton is 378 years old
+
+        Name: Sérgio Pinto
+        Birthdate: 4/11/1971
+        Age: 0
+
+        Name: Lauriany Laureiro
+        Birthdate: 5/8/1995
+        Age: 0
+
+        Name: Henrique Silva
+        Birthdate: 24/4/1999
+        Age: 0
+
+        Name: Sérgio Pinto
+        Birthdate: 4/11/1971
+        Age: 0
+
+        Name: Henrique Silva
+        Birthdate: 24/4/1999
+        Age: 0
+
+        Sérgio Pinto position is 0
+
+        Name: Henrique Silva
+        Birthdate: 24/4/1999
+        Age: 0
+
+        0
+        0
+        A peron got in
+        A peron got in
+        2
+        Going up
+        1
+        Going up
+        Going up
+        Going down
+        A peron got out
+        2
+        1
+
+        Searching for current channel...
+        Channel number is 5.
+        Searching for current volume...
+        Current volume is 50.
+        Turning the volume down
+        Searching for current volume...
+        Current volume is 49.
+        Turning up the channel
+        Searching for current channel...
+        Channel number is 6.
+        Turning to a new channel
+        Searching for current channel...
+        Channel number is 75.
+         */
 
     }
 }
