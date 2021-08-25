@@ -35,8 +35,8 @@ public class CalculatesS {
             }
         }
 
-        System.out.printf("S using the 200000 first terms = %2f%n", S);
-        System.out.printf("It's necessary %d terms to get a value equal to or less than 3.14159%n", numberOfTerms);
+        System.out.printf("S using the 200000 first terms = %2f%n", S); // Output: S using the 200000 first terms = 3,141588
+        System.out.printf("It's necessary %d terms to get a value equal to or less than 3.14159%n", numberOfTerms); // Não consegui alcançar o resultado correto.
     }
 
     public static void main(String[] args) {
