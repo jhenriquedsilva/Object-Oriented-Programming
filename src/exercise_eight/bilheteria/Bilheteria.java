@@ -36,7 +36,15 @@ public class Bilheteria {
                 System.out.printf("O valor do seu ingresso é %2f",ci.valorDoIngresso());
             }
         }
-
-
     }
 }
+// Exemplo de execução
+/**
+ * Vamos iniciar a compra do seu ingresso!
+ * Você deseja um ingressso normal[1] ou VIP[2]?
+ * 2
+ * Perfeito, você escolheu um ingresso VIP.
+ * Agora, preciso saber se você deseja um ingresso para o camarote superior[1] ou inferior[2].
+ * 2
+ * O valor do seu ingresso é 200,000000
+ */

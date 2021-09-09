@@ -15,3 +15,32 @@ public class Zoo {
         }
     }
 }
+// Exemplo de execução
+/**
+ * ---------------
+ * Animal: Camelo
+ * Comprimento: 150,000000 cm
+ * Patas: 4
+ * Cor: Amarelo
+ * Ambiente: Terra
+ * Velocidade: 2,000000 m/s
+ * ---------------
+ * ---------------
+ * Animal: Tubarão
+ * Comprimento: 300,000000 cm
+ * Patas: 0
+ * Cor: Cinzento
+ * Ambiente: Mar
+ * Velocidade: 1,500000 m/s
+ * Característica: Barbatanas e Cauda
+ * ---------------
+ * ---------------
+ * Animal: Urso-do-canadá
+ * Comprimento: 180,000000 cm
+ * Patas: 4
+ * Cor: Vermelho
+ * Ambiente: Terra
+ * Velocidade: 0,500000 m/s
+ * Alimento: Mel
+ * ---------------
+ */
