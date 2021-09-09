@@ -4,13 +4,13 @@ public class VIP extends Ingresso {
 
     private Double valorAdicional;
 
-    public VIP(Double valorAdicional) {
-        super();
+    public VIP(Double valorBase, Double valorAdicional) {
+        super(valorBase);
         this.valorAdicional = valorAdicional;
     }
 
-    public VIP(Double valorBase, Double valorAdicional) {
-        super(valorBase);
+    public VIP(Double valorAdicional) {
+        super();
         this.valorAdicional = valorAdicional;
     }
 

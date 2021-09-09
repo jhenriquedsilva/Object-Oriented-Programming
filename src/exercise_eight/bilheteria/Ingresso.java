@@ -13,7 +13,7 @@ public class Ingresso {
     }
 
     public void imprimeValor() {
-        System.out.printf("Valor: %2f%n",valor);
+        System.out.printf("O valor do seu ingresso é %2f%n",valor);
     }
 
     public Double getValor() {

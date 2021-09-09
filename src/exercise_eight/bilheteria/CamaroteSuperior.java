@@ -18,4 +18,8 @@ public class CamaroteSuperior extends VIP {
         return valorDoIngresso;
     }
 
+    public void setValorDoIngresso(Double valorDoIngresso) {
+        this.valorDoIngresso = valorDoIngresso;
+    }
+
 }

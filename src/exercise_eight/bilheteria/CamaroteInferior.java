@@ -5,6 +5,18 @@ public class CamaroteInferior extends VIP {
     private Integer cadeira;
     private Character fila;
 
+    public CamaroteInferior(Double valorBase, Double valorAdicional, Integer cadeira, Character fila) {
+        super(valorBase,valorAdicional);
+        this.cadeira = cadeira;
+        this.fila = fila;
+    }
+
+    public CamaroteInferior(Double valorAdicional, Integer cadeira, Character fila) {
+        super(valorAdicional);
+        this.cadeira = cadeira;
+        this.fila = fila;
+    }
+
     public CamaroteInferior(Integer cadeira, Character fila) {
         super();
         this.cadeira = cadeira;
