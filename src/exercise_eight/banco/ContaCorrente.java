@@ -26,11 +26,12 @@ public class ContaCorrente {
         }
     }
 
-    /*
-    public boolean transferir(ContaCorrente conta) {
-        // TODO
+
+    public boolean transferir(ContaCorrente conta, float valor) {
+        conta.depositar(valor);
+        this.saldo -= valor;
+        return true;
     }
-    */
 
     public float getSaldo() {
         return saldo;

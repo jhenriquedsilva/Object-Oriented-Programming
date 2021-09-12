@@ -6,7 +6,7 @@ public class ContaEspecial extends ContaCorrente {
 
     public ContaEspecial(float saldo, float limite) {
         super(saldo);
-        this.limite = limite;
+        this.limite = -limite;
     }
 
     public float getLimite() {

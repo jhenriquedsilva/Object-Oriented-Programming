@@ -3,6 +3,7 @@ package exercise_eight.banco;
 public class Cliente {
 
     private String nome;
+    private ContaCorrente conta;
 
     public Cliente() {
 
@@ -18,6 +19,14 @@ public class Cliente {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public ContaCorrente getConta() {
+        return conta;
+    }
+
+    public void setConta(ContaCorrente conta) {
+        this.conta = conta;
     }
 
     @Override
