@@ -1,34 +1,35 @@
 package challenge;
 
+import java.util.EmptyStackException;
 import java.util.Stack;
 
 public class EvaluateString {
 
-    public static int evaluate(String expression) {
+    public static String evaluate(String expression) {
 
-        char[] tokens = expression.toCharArray();
+        char[] characters = expression.toCharArray();
 
         // Stack for numbers
-        Stack<Integer> numbers = new Stack<Integer>();
+        Stack<Double> numbers = new Stack<Double>();
 
         //Stack for operators
-        Stack<Character> ops = new Stack<Character>();
+        Stack<Character> operators = new Stack<Character>();
 
-        for (int i = 0; i < tokens.length; i++) {
+        for (int i = 0; i < characters.length; i++) {
 
-            // Current token is a whitespace, skip it
-            if (tokens[i] == ' ') { continue; }
+            // Current character is a whitespace, skip it
+            if (characters[i] == ' ') { continue; }
 
-            // Curretn token is a number, push it to the stack for numbers
-            if (tokens[i] >= '0' && tokens[i] <= '9') {
+            // Current caracter is a number, push it to the stack for numbers
+            if (characters[i] >= '0' && characters[i] <= '9') {
 
                 StringBuffer stringBuffer = new StringBuffer();
 
-                // There may be more than one digits in number
-                while (i < tokens.length && tokens[i] >= '0' && tokens[i] <= '9')
-                    stringBuffer.append(tokens[i++]); // First append. Then, incremets
-
-                numbers.push(Integer.parseInt(stringBuffer.toString()));
+                // There may be more than one digit in number
+                while (i < characters.length && characters[i] >= '0' && characters[i] <= '9') {
+                    stringBuffer.append(characters[i++]); // First append. Then, incremets
+                }
+                numbers.push(Double.parseDouble(stringBuffer.toString()));
 
                 // right now the i points to
                 // the character next to the digit,
@@ -42,48 +43,55 @@ public class EvaluateString {
 
                 // Current token is an opening brace,
                 // push it to 'ops'
-            } else if (tokens[i] == '(') {
-                ops.push(tokens[i]);
+            } else if (characters[i] == '(') {
+                operators.push(characters[i]);
 
                 // Closing brace encountered,
                 // solve entire brace
-            } else if (tokens[i] == ')') {
+            } else if (characters[i] == ')') {
 
-                while (ops.peek() != '(') {
-                    numbers.push(applyOp(ops.pop(), numbers.pop(), numbers.pop()));
+                while (operators.peek() != '(') {
+                    numbers.push(applyOp(operators.pop(), numbers.pop(), numbers.pop()));
                 }
-                ops.pop();
+                operators.pop();
 
 
                 // Current token is an operator.
-            } else if (tokens[i] == '+' ||
-                    tokens[i] == '-' ||
-                    tokens[i] == '*' ||
-                    tokens[i] == '/') {
+            } else if (characters[i] == '+' || characters[i] == '-' || characters[i] == '*' || characters[i] == '/' || characters[i] == '^') {
 
                 // While top of 'ops' has same
                 // or greater precedence to current
                 // token, which is an operator.
                 // Apply operator on top of 'ops'
                 // to top two elements in values stack
-                while (!ops.empty() && hasPrecedence(tokens[i], ops.peek())) {
-                    numbers.push(applyOp(ops.pop(), numbers.pop(), numbers.pop()));
+                while (!operators.empty() && hasPrecedence(characters[i], operators.peek())) {
+                    try {
+                        numbers.push(applyOp(operators.pop(), numbers.pop(), numbers.pop()));
+                    } catch(EmptyStackException e) {
+                        return "ERR SYNTAX";
+                    }
                 }
 
                 // Push current token to 'ops'.
-                ops.push(tokens[i]);
+                operators.push(characters[i]);
             }
         }
 
         // Entire expression has been
         // parsed at this point, apply remaining
         // ops to remaining values
-        while (!ops.empty()) {
-            numbers.push(applyOp(ops.pop(), numbers.pop(), numbers.pop()));
+        while (!operators.empty()) {
+            try {
+                numbers.push(applyOp(operators.pop(), numbers.pop(), numbers.pop()));
+            } catch (EmptyStackException e) {
+                return "ERR SYNTAX";
+            } catch (UnsupportedOperationException e) {
+                return "ERR DIVBYZERO";
+            }
         }
         // Top of 'numbers' contains
         // result, return it
-        return numbers.pop();
+        return numbers.pop().toString();
     }
 
     // Returns true if 'op2' has higher
@@ -95,6 +103,12 @@ public class EvaluateString {
         }
         if ((op1 == '*' || op1 == '/') && (op2 == '+' || op2 == '-')) {
             return false;
+        }
+        if ((op1 == '^') && (op2 == '*' || op2 == '/')) {
+            return false;
+        }
+        if ((op1 == '^') && (op2 == '+' || op2 == '-')) {
+            return false;
         } else {
             return true;
         }
@@ -103,7 +117,7 @@ public class EvaluateString {
     // A utility method to apply an
     // operator 'op' on operands 'a'
     // and 'b'. Return the result.
-    public static int applyOp(char op, int b, int a) {
+    public static double applyOp(char op, double b, double a) throws UnsupportedOperationException {
         switch (op) {
             case '+':
                 return a + b;
@@ -116,6 +130,8 @@ public class EvaluateString {
                     throw new UnsupportedOperationException("Cannot divide by zero");
                 }
                 return a / b;
+            case '^':
+                return Math.pow(a, b);
         }
         return 0;
     }

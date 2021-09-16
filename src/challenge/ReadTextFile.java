@@ -15,15 +15,20 @@ public class ReadTextFile {
 
     public static void main(String args[]) throws IOException {
 
+        System.out.println(EvaluateString.evaluate("4 / (54 - (9 * 6))"));
+        /*
         File file = new File("src/d14.txt");
 
         BufferedReader br = new BufferedReader(new FileReader(file));
 
-        String st;
-        while((st = br.readLine()) != null) {
-            System.out.println(st);
+        String expression;
+        int counter = 1;
+        while((expression = br.readLine()) != null) {
+            String result = EvaluateString.evaluate(expression);
+            System.out.printf("The result of the %d° expression is %2s%n",counter, result);
+            counter++;
         }
-        /*
+
         try(Scanner input = new Scanner(Paths.get("d14"))) {
             while(input.hasNextLine()) {
                 System.out.println(input.nextLine());
