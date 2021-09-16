@@ -5,98 +5,98 @@ import java.util.Stack;
 
 public class EvaluateString {
 
-    public static String evaluate(String expression) {
+    public static String evaluate(String expressao) {
 
-        char[] characters = expression.toCharArray();
+        // Cada caractere da linha
+        char[] caracteres = expressao.toCharArray();
 
         // Stack for numbers
-        Stack<Double> numbers = new Stack<Double>();
+        Stack<Double> numeros = new Stack<Double>();
 
         //Stack for operators
-        Stack<Character> operators = new Stack<Character>();
+        Stack<Character> operadores = new Stack<Character>();
 
-        for (int i = 0; i < characters.length; i++) {
+        for (int i = 0; i < caracteres.length; i++) {
 
-            // Current character is a whitespace, skip it
-            if (characters[i] == ' ') { continue; }
+            // Se o caractere atual é um número, pule-o
+            if (caracteres[i] == ' ') { continue; }
 
-            // Current caracter is a number, push it to the stack for numbers
-            if (characters[i] >= '0' && characters[i] <= '9') {
+            // Se o caractere atual é um número, colocá-lo dentro
+            // da pilha para os números
+            if (caracteres[i] >= '0' && caracteres[i] <= '9') {
 
+                // Números que tem mais de um dígito devem ser colocados
+                // de uma vez só na pilha de números
                 StringBuffer stringBuffer = new StringBuffer();
 
-                // There may be more than one digit in number
-                while (i < characters.length && characters[i] >= '0' && characters[i] <= '9') {
-                    stringBuffer.append(characters[i++]); // First append. Then, incremets
+                // O número pode ter mais que um dígito
+                while (i < caracteres.length && caracteres[i] >= '0' && caracteres[i] <= '9') {
+                    stringBuffer.append(caracteres[i++]); // Primeiro adiciona, depois incrementa
                 }
-                numbers.push(Double.parseDouble(stringBuffer.toString()));
-
-                // right now the i points to
-                // the character next to the digit,
-                // since the for loop also increases
-                // the i, we would skip one
-                //  token position; we need to
-                // decrease the value of i by 1 to
-                // correct the offset.
+                // O conteúdo do stringBuffer é adicionado na pilha.
+                numeros.push(Double.parseDouble(stringBuffer.toString()));
+                // Como o loop while acima incrementou o índice para satisfazer
+                // suas necessidades, é necessário decrementar em 1 unidade, pois o
+                // loop for já fará este incremento.
                 i--;
 
 
-                // Current token is an opening brace,
-                // push it to 'ops'
-            } else if (characters[i] == '(') {
-                operators.push(characters[i]);
+                // Se o caractere atual for a abertura de parênteses,
+                // adiciona-a na pilha de operadores
+            } else if (caracteres[i] == '(') {
+                operadores.push(caracteres[i]);
 
-                // Closing brace encountered,
-                // solve entire brace
-            } else if (characters[i] == ')') {
+                // Se o caractere atual for o fechamento de parênteses,
+                // resolve-se a expressão dentro deles
+            } else if (caracteres[i] == ')') {
 
-                while (operators.peek() != '(') {
-                    numbers.push(applyOp(operators.pop(), numbers.pop(), numbers.pop()));
+                while (operadores.peek() != '(') {
+                    numeros.push(applyOp(operadores.pop(), numeros.pop(), numeros.pop()));
                 }
-                operators.pop();
+                operadores.pop();
 
 
-                // Current token is an operator.
-            } else if (characters[i] == '+' || characters[i] == '-' || characters[i] == '*' || characters[i] == '/' || characters[i] == '^') {
+                // Caractere atual é um operador
+            } else if (caracteres[i] == '+' || caracteres[i] == '-' || caracteres[i] == '*' || caracteres[i] == '/' || caracteres[i] == '^') {
 
-                // While top of 'ops' has same
-                // or greater precedence to current
-                // token, which is an operator.
-                // Apply operator on top of 'ops'
-                // to top two elements in values stack
-                while (!operators.empty() && hasPrecedence(characters[i], operators.peek())) {
+                // Enquanto o operador que está no topo da pilha dos operadores
+                // tem a mesma ou uma maior precedência em relação ao
+                // caractere atual, que é um operador, aplica-se o operador no
+                // no topo da pilha dos operadores ao dois elementos que estão
+                // no topo da pilha dos números
+                while (!operadores.empty() && hasPrecedence(caracteres[i], operadores.peek())) {
                     try {
-                        numbers.push(applyOp(operators.pop(), numbers.pop(), numbers.pop()));
+                        numeros.push(applyOp(operadores.pop(), numeros.pop(), numeros.pop()));
                     } catch(EmptyStackException e) {
                         return "ERR SYNTAX";
                     }
                 }
-
-                // Push current token to 'ops'.
-                operators.push(characters[i]);
+                // Colocar caractere atual na pilha dos operadores
+                operadores.push(caracteres[i]);
             }
         }
 
-        // Entire expression has been
-        // parsed at this point, apply remaining
-        // ops to remaining values
-        while (!operators.empty()) {
+        // A expressao inteira já foi anailsada
+        // neste ponto. Aplica-se as operações
+        // restantes aos números restantes
+        while (!operadores.empty()) {
             try {
-                numbers.push(applyOp(operators.pop(), numbers.pop(), numbers.pop()));
+                numeros.push(applyOp(operadores.pop(), numeros.pop(), numeros.pop()));
             } catch (EmptyStackException e) {
                 return "ERR SYNTAX";
             } catch (UnsupportedOperationException e) {
                 return "ERR DIVBYZERO";
             }
         }
-        // Top of 'numbers' contains
-        // result, return it
-        return numbers.pop().toString();
+        // O elemento que está no topo da pilha
+        // dos números representa o resultádo da
+        // expressão. Então, é só retorná-lo.
+        return numeros.pop().toString();
     }
 
-    // Returns true if 'op2' has higher
-    // or same precedence as 'op1',
-    // otherwise returns false.
+    // Retorna true se o operador 2 tem maior
+    // ou mesma precedência em relaçõo ao operador 1.
+    // Caso contrário, retorna false
     public static boolean hasPrecedence(char op1, char op2) {
         if (op2 == '(' || op2 == ')') {
             return false;
@@ -114,9 +114,8 @@ public class EvaluateString {
         }
     }
 
-    // A utility method to apply an
-    // operator 'op' on operands 'a'
-    // and 'b'. Return the result.
+    // Um método para aplicar uma das operações
+    // em dois operandos e retorna o resultado.
     public static double applyOp(char op, double b, double a) throws UnsupportedOperationException {
         switch (op) {
             case '+':
