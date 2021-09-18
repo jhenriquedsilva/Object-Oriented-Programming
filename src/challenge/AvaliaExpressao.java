@@ -3,9 +3,11 @@ package challenge;
 import java.util.EmptyStackException;
 import java.util.Stack;
 
-public class EvaluateString {
+// Esta classe tem por objetivo calcular e retornar
+// o resultado da expressão de cada linha do arquivo de texto
+public class AvaliaExpressao {
 
-    public static String evaluate(String expressao) {
+    public static String avalia(String expressao) {
 
         // Cada caractere da linha
         char[] caracteres = expressao.toCharArray();
@@ -67,6 +69,12 @@ public class EvaluateString {
                 while (!operadores.empty() && hasPrecedence(caracteres[i], operadores.peek())) {
                     try {
                         numeros.push(applyOp(operadores.pop(), numeros.pop(), numeros.pop()));
+
+                    // Quando o código tentar tirar caracteres da pilha de
+                    // operadores sendo que não há mais nenhum, significa
+                    // que os operadores estão desbalanceados em relação aos
+                    // números, ou seja, houve um erro de sintaxe
+                    // Sendo assim, basta retornar o mensagem pedida pelo desafio.
                     } catch(EmptyStackException e) {
                         return "ERR SYNTAX";
                     }
@@ -82,8 +90,19 @@ public class EvaluateString {
         while (!operadores.empty()) {
             try {
                 numeros.push(applyOp(operadores.pop(), numeros.pop(), numeros.pop()));
+
+                // Quando o código tentar tirar caracteres da pilha de
+                // operadores sendo que não há mais nenhum, significa
+                // que os operadores estão desbalanceados em relação aos
+                // números, ou seja, houve um erro de sintaxe
+                // Sendo assim, basta retornar o mensagem pedida pelo desafio.
             } catch (EmptyStackException e) {
                 return "ERR SYNTAX";
+
+                // Quando uma divisão por zero for acontecer,
+                // o método applyOp jogaŕa esta exceção.
+                // Sendo assim, é suficiente retornar a mensagem
+                // pedida pelo desafio.
             } catch (UnsupportedOperationException e) {
                 return "ERR DIVBYZERO";
             }
@@ -126,6 +145,8 @@ public class EvaluateString {
                 return a * b;
             case '/':
                 if (b == 0) {
+                    // Se houver uma divisão por zero,
+                    // lançar esta exceção.
                     throw new UnsupportedOperationException("Cannot divide by zero");
                 }
                 return a / b;
