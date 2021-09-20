@@ -53,7 +53,7 @@ public class AvaliaExpressao {
             } else if (caracteres[i] == ')') {
 
                 while (operadores.peek() != '(') {
-                    numeros.push(applyOp(operadores.pop(), numeros.pop(), numeros.pop()));
+                    numeros.push(aplicaOperacao(operadores.pop(), numeros.pop(), numeros.pop()));
                 }
                 operadores.pop();
 
@@ -66,9 +66,9 @@ public class AvaliaExpressao {
                 // caractere atual, que é um operador, aplica-se o operador no
                 // no topo da pilha dos operadores ao dois elementos que estão
                 // no topo da pilha dos números
-                while (!operadores.empty() && hasPrecedence(caracteres[i], operadores.peek())) {
+                while (!operadores.empty() && temPrecedencia(caracteres[i], operadores.peek())) {
                     try {
-                        numeros.push(applyOp(operadores.pop(), numeros.pop(), numeros.pop()));
+                        numeros.push(aplicaOperacao(operadores.pop(), numeros.pop(), numeros.pop()));
 
                     // Quando o código tentar tirar caracteres da pilha de
                     // operadores sendo que não há mais nenhum, significa
@@ -89,7 +89,7 @@ public class AvaliaExpressao {
         // restantes aos números restantes
         while (!operadores.empty()) {
             try {
-                numeros.push(applyOp(operadores.pop(), numeros.pop(), numeros.pop()));
+                numeros.push(aplicaOperacao(operadores.pop(), numeros.pop(), numeros.pop()));
 
                 // Quando o código tentar tirar caracteres da pilha de
                 // operadores sendo que não há mais nenhum, significa
@@ -116,7 +116,7 @@ public class AvaliaExpressao {
     // Retorna true se o operador 2 tem maior
     // ou mesma precedência em relaçõo ao operador 1.
     // Caso contrário, retorna false
-    public static boolean hasPrecedence(char op1, char op2) {
+    private static boolean temPrecedencia(char op1, char op2) {
         if (op2 == '(' || op2 == ')') {
             return false;
         }
@@ -135,7 +135,7 @@ public class AvaliaExpressao {
 
     // Um método para aplicar uma das operações
     // em dois operandos e retorna o resultado.
-    public static double applyOp(char op, double b, double a) throws UnsupportedOperationException {
+    private static double aplicaOperacao(char op, double b, double a) throws UnsupportedOperationException {
         switch (op) {
             case '+':
                 return a + b;
