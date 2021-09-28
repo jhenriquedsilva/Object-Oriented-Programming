@@ -2,13 +2,22 @@ package final_project;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
+import java.io.IOException;;
 
 public class LeitoraDeArquivoDeTexto {
 
-    public static String[] geraArrayListComDados(String identificacao, String caminho) {
+    private static LeitoraDeArquivoDeTexto leitora;
+
+    private LeitoraDeArquivoDeTexto() {}
+
+    public static LeitoraDeArquivoDeTexto instancia() {
+        if (leitora == null) {
+            leitora = new LeitoraDeArquivoDeTexto();
+        }
+        return leitora;
+    }
+
+    public String[] geraArrayListComDados(String identificacao, String caminho) {
         try {
             FileReader leitor = new FileReader(caminho);
             BufferedReader bufferedReader = new BufferedReader(leitor);
@@ -20,10 +29,12 @@ public class LeitoraDeArquivoDeTexto {
                 String[] dados = linha.split("|");
                 if (dados[0].equals(caminho)) {
                     leitor.close();
+                    bufferedReader.close();
                     return dados;
                 }
             }
-            // leitor.close();
+            leitor.close();
+            bufferedReader.close();
 
         } catch (IOException e) {
             e.printStackTrace();
